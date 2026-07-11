@@ -1,0 +1,11 @@
+# OS metadata files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Local server logs / config
+*.log
+.npm/
+node_modules/

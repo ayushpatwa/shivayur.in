@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shivayur.co is a premium web development and digital agency providing next-gen website designing, video editing, motion graphics, logo making, 3D menu designing, and AI ads making.">
+  <meta name="keywords" content="web development, website design, video editing, motion graphics, logo design, 3D menu design, AI ads, digital agency, shivayur">
+  <meta name="author" content="Shivayur.co">
+  <title>Shivayur.co | Next-Gen Web Development & Creative Agency</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="index.css">
+  <!-- Three.js for 3D Animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+  <!-- SVG Symbols for Logo Reuse -->
+  <svg style="display: none;">
+    <defs>
+      <linearGradient id="logoGradientDef" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#4facfe" />
+        <stop offset="100%" stop-color="#00f2fe" />
+      </linearGradient>
+    </defs>
+    <g id="logoSvgSymbol">
+      <path d="M 28 38 L 12 50 L 28 62" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M 72 38 L 88 50 L 72 62" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M 58 24 C 45 20 36 35 48 45 C 63 55 58 76 40 74 C 33 73 30 65 30 65" stroke="url(#logoGradientDef)" stroke-width="9" stroke-linecap="round" fill="none"/>
+      <line x1="55" y1="30" x2="45" y2="70" stroke="#07080d" stroke-width="8" stroke-linecap="round"/>
+      <line x1="55" y1="30" x2="45" y2="70" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+    </g>
+  </svg>
+
+  <!-- Background Mesh Gradient -->
+  <div class="mesh-background"></div>
+
+  <!-- Header & Navigation -->
+  <header class="main-header">
+    <div class="header-container">
+      <a href="#" class="logo-link">
+        <div class="logo-box">
+          <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <use href="#logoSvgSymbol"></use>
+          </svg>
+          <span class="logo-text">SH<span class="accent-i">i</span>V<span class="accent-a">A</span>YUR</span>
+        </div>
+      </a>
+      
+      <nav class="nav-menu" id="navMenu">
+        <a href="#home" class="nav-item active">Home</a>
+        <a href="#services" class="nav-item">Services</a>
+        <a href="#portfolio" class="nav-item">Portfolio</a>
+        <a href="#planner" class="nav-item">Planner</a>
+        <a href="#testimonials" class="nav-item">Reviews</a>
+        <a href="#" class="nav-item nav-cta-mobile" id="bookCallMobileBtn">Book Call</a>
+      </nav>
+      
+      <div class="header-actions">
+        <button class="btn btn-primary btn-nav" id="bookCallNavBtn">Book Call</button>
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Overlay -->
+  <div class="mobile-drawer-overlay" id="drawerOverlay"></div>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="home">
+    <div class="hero-bg-overlay" style="background-image: url('assets/hero-bg.jpg');"></div>
+    <div class="hero-canvas-container">
+      <canvas id="heroCanvas"></canvas>
+    </div>
+    <div class="container hero-container">
+      <div class="hero-content">
+        <div class="badge hero-badge">
+          <span class="pulse-dot"></span> Next-Gen Digital Studio
+        </div>
+        <h1 class="hero-title">
+          We Build <span class="gradient-text">Websites</span> That Build Your Business
+        </h1>
+        <p class="hero-desc">
+          Shivayur.co crafts high-end digital experiences. From pixel-perfect website designing and 3D menu systems to cinematic video editing, dynamic motion graphics, logo designs, and high-converting AI ads.
+        </p>
+        <div class="hero-actions">
+          <a href="#services" class="btn btn-primary btn-lg">Our Services <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#planner" class="btn btn-secondary btn-lg">Project Planner</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card-wrapper">
+          <div class="hero-card-floating">
+            <div class="floating-inner">
+              <svg class="hero-svg-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <use href="#logoSvgSymbol"></use>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Highlights / Stats Section -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <h3 class="stat-number" data-target="99">0%</h3>
+          <p class="stat-label">Client Satisfaction</p>
+        </div>
+        <div class="stat-card">
+          <h3 class="stat-number" data-target="150">0+</h3>
+          <p class="stat-label">Projects Completed</p>
+        </div>
+        <div class="stat-card">
+          <h3 class="stat-number" data-target="24">0/7</h3>
+          <p class="stat-label">Dedicated Support</p>
+        </div>
+        <div class="stat-card">
+          <h3 class="stat-number" data-target="5">0x</h3>
+          <p class="stat-label">Average ROI Boost</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services-section" id="services">
+    <div class="container">
+      <div class="section-header text-center">
+        <h2 class="section-title">Elevate Your Brand's <span class="gradient-text">Digital DNA</span></h2>
+        <p class="section-desc">
+          We engineer high-fidelity visual solutions and technological products tailored to maximize your growth.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <!-- Service 1: Website Designing -->
+        <div class="service-card" data-service="web">
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+          </div>
+          <h3 class="service-card-title">Website Designing</h3>
+          <p class="service-card-desc">
+            Ultra-fast, accessible, and conversion-optimized websites. We integrate modern animations and stunning UI design to convert visitors into loyal customers.
+          </p>
+          <span class="learn-more">Learn Details <i class="fa-solid fa-arrow-right-long"></i></span>
+        </div>
+
+        <!-- Service 2: Video Editing -->
+        <div class="service-card" data-service="video">
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+          </div>
+          <h3 class="service-card-title">Video Editing</h3>
+          <p class="service-card-desc">
+            Cinematic storytelling, flawless pacing, custom audio design, and professional color-grading. Perfect for Youtube, corporate promos, and commercial releases.
+          </p>
+          <span class="learn-more">Learn Details <i class="fa-solid fa-arrow-right-long"></i></span>
+        </div>
+
+        <!-- Service 3: Motion Graphics -->
+        <div class="service-card" data-service="motion">
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 0-10 10c0 5.523 4.477 10 10 10s10-4.477 10-10c0-2.485-1.01-4.735-2.639-6.361"></path><path d="M12 6a6 6 0 1 0 6 6"></path><circle cx="12" cy="12" r="2"></circle></svg>
+          </div>
+          <h3 class="service-card-title">Motion Graphics</h3>
+          <p class="service-card-desc">
+            Breathe life into complex concepts. We design dynamic fluid shapes, sleek typography kinetic videos, and visual effects that boost viewer retention rates.
+          </p>
+          <span class="learn-more">Learn Details <i class="fa-solid fa-arrow-right-long"></i></span>
+        </div>
+
+        <!-- Service 4: Logo Making -->
+        <div class="service-card" data-service="logo">
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v8"></path><path d="M8 12h8"></path></svg>
+          </div>
+          <h3 class="service-card-title">Logo Making</h3>
+          <p class="service-card-desc">
+            Corporate identity starts with a mark. We create vector logo systems that are distinct, scalable, highly memorable, and visually express your brand core.
+          </p>
+          <span class="learn-more">Learn Details <i class="fa-solid fa-arrow-right-long"></i></span>
+        </div>
+
+        <!-- Service 5: 3D Menu Designing -->
+        <div class="service-card" data-service="3d">
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+          </div>
+          <h3 class="service-card-title">3D Menu Designing</h3>
+          <p class="service-card-desc">
+            Immersive interactive menus for restaurants, hotels, and applications. Utilizing real-time 3D web rendering to let your customers visually taste your offerings.
+          </p>
+          <span class="learn-more">Learn Details <i class="fa-solid fa-arrow-right-long"></i></span>
+        </div>
+
+        <!-- Service 6: AI Ads Making -->
+        <div class="service-card" data-service="ai">
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          </div>
+          <h3 class="service-card-title">AI Ads Making</h3>
+          <p class="service-card-desc">
+            Next-gen automated advertising templates. High-impact commercial structures developed through AI prompts, localized and scaled to maximize digital marketing CTR.
+          </p>
+          <span class="learn-more">Learn Details <i class="fa-solid fa-arrow-right-long"></i></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Us Section -->
+  <section class="about-section" id="about" style="padding: 100px 0; border-bottom: 1px solid var(--border-color); background-color: var(--bg-secondary);">
+    <div class="container">
+      <div class="about-wrapper" style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center;">
+        <div class="about-content">
+          <div class="badge">About the Agency</div>
+          <h2 class="section-title mt-4" style="font-size: 2.8rem; font-weight: 800; margin-top: 15px; margin-bottom: 20px;">We are <span class="gradient-text">Shivayur</span></h2>
+          <p class="about-desc" style="color: var(--text-secondary); margin-bottom: 30px; font-size: 1.1rem;">
+            Shivayur is a premium creative development and digital agency. We construct high-converting web architectures, edit cinematic video visual content, design custom 3D models and interactive WebGL assets, and establish AI-driven programmatic marketing funnels.
+          </p>
+          <div class="founder-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; padding: 24px; display: flex; gap: 20px; align-items: start;">
+            <div class="founder-avatar" style="width: 60px; height: 60px; background: var(--gradient-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-size: 1.5rem; flex-shrink: 0;">
+              <i class="fa-solid fa-user-astronaut"></i>
+            </div>
+            <div class="founder-info">
+              <h4 class="founder-name" style="font-size: 1.2rem; font-weight: 700; margin-bottom: 4px;">Shivayur</h4>
+              <p class="founder-title" style="font-size: 0.85rem; color: var(--primary); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-bottom: 10px;">Founder & Creative Lead</p>
+              <p class="founder-bio text-sm text-secondary" style="font-size: 0.9rem; line-height: 1.5;">
+                Directing the development pipeline. Connecting clean computer graphics design principles, responsive programming, and marketing psychology to build platforms that convert.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="about-stats-box" style="display: flex; flex-direction: column; gap: 24px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 24px; padding: 40px;">
+          <div class="about-stat-row" style="display: flex; gap: 16px; align-items: start;">
+            <i class="fa-solid fa-code" style="color: var(--primary); font-size: 1.5rem; margin-top: 4px;"></i>
+            <div>
+              <h5 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 6px;">Custom Web Architectures</h5>
+              <p class="text-sm text-secondary" style="font-size: 0.9rem; margin: 0;">Clean static pages, responsive layouts, and headless React integrations.</p>
+            </div>
+          </div>
+          <div class="about-stat-row" style="display: flex; gap: 16px; align-items: start;">
+            <i class="fa-solid fa-video" style="color: var(--primary); font-size: 1.5rem; margin-top: 4px;"></i>
+            <div>
+              <h5 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 6px;">Visual Narrative Production</h5>
+              <p class="text-sm text-secondary" style="font-size: 0.9rem; margin: 0;">Sound design, pacing cuts, color grading LUTs, and typography animation.</p>
+            </div>
+          </div>
+          <div class="about-stat-row" style="display: flex; gap: 16px; align-items: start;">
+            <i class="fa-solid fa-cube" style="color: var(--primary); font-size: 1.5rem; margin-top: 4px;"></i>
+            <div>
+              <h5 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 6px;">WebGL 3D Visualizers</h5>
+              <p class="text-sm text-secondary" style="font-size: 0.9rem; margin: 0;">Draco compressed assets, Three.js shaders, and interactive mobile menus.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Service Details Side Drawer -->
+  <div class="service-drawer" id="serviceDrawer">
+    <div class="drawer-header">
+      <h3 class="drawer-title" id="drawerTitle">Service Details</h3>
+      <button class="close-drawer-btn" id="closeDrawerBtn" aria-label="Close details">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="drawer-image-box">
+        <img src="" alt="Service Banner" id="drawerImage" class="drawer-img">
+      </div>
+      <div class="drawer-content">
+        <h4 class="drawer-subhead">Description</h4>
+        <p id="drawerDesc"></p>
+        
+        <h4 class="drawer-subhead">Our Deliverables</h4>
+        <ul class="drawer-list" id="drawerDeliverables">
+          <!-- Populated by JS -->
+        </ul>
+
+        <h4 class="drawer-subhead">Technologies & Tools</h4>
+        <div class="drawer-tags" id="drawerTech">
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="drawer-cta-box">
+          <a href="#planner" class="btn btn-primary btn-block" id="drawerCtaBtn">Discuss This Project</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Portfolio Details Side Drawer -->
+  <div class="service-drawer" id="portfolioDrawer">
+    <div class="drawer-header">
+      <h3 class="drawer-title" id="pDrawerTitle">Project Case Study</h3>
+      <button class="close-drawer-btn" id="closePDrawerBtn" aria-label="Close details">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="drawer-image-box">
+        <img src="" alt="Project Showcase" id="pDrawerImage" class="drawer-img">
+      </div>
+      <div class="drawer-content">
+        <div class="estimator-row">
+          <span>Client:</span>
+          <strong id="pDrawerClient">Client Name</strong>
+        </div>
+        <div class="estimator-row">
+          <span>Category:</span>
+          <strong id="pDrawerCategory">Category Name</strong>
+        </div>
+        
+        <h4 class="drawer-subhead">The Challenge</h4>
+        <p id="pDrawerChallenge"></p>
+        
+        <h4 class="drawer-subhead">Our Solution</h4>
+        <p id="pDrawerSolution"></p>
+
+        <h4 class="drawer-subhead">Key Results & Outcomes</h4>
+        <p id="pDrawerOutcome" style="font-weight: 600; color: var(--secondary);"></p>
+
+        <h4 class="drawer-subhead">Technologies Used</h4>
+        <div class="drawer-tags" id="pDrawerTech">
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="drawer-cta-box">
+          <a href="#planner" class="btn btn-primary btn-block" id="pDrawerCtaBtn">Build a Similar Solution</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Portfolio / Showcase Preview Section -->
+  <section class="portfolio-section" id="portfolio">
+    <div class="container">
+      <div class="section-header text-center">
+        <h2 class="section-title">Visual <span class="gradient-text">Mastery</span></h2>
+        <p class="section-desc">
+          A collection of digital solutions built, designed, and animated to perfection.
+        </p>
+      </div>
+
+      <div class="portfolio-grid">
+        <div class="portfolio-card" data-project="aether">
+          <div class="portfolio-img-box">
+            <img src="assets/service-web.jpg" alt="Web Design Project" class="portfolio-img">
+          </div>
+          <div class="portfolio-info">
+            <span class="portfolio-tag">Website Design</span>
+            <h4 class="portfolio-project-title">Aether Web Experience</h4>
+          </div>
+        </div>
+
+        <div class="portfolio-card" data-project="nexus">
+          <div class="portfolio-img-box">
+            <img src="assets/service-video-motion.jpg" alt="Video Motion Project" class="portfolio-img">
+          </div>
+          <div class="portfolio-info">
+            <span class="portfolio-tag">Motion & Video</span>
+            <h4 class="portfolio-project-title">Future Nexus Promo</h4>
+          </div>
+        </div>
+
+        <div class="portfolio-card" data-project="neofood">
+          <div class="portfolio-img-box">
+            <img src="assets/service-3d.jpg" alt="3D Menu Design Project" class="portfolio-img">
+          </div>
+          <div class="portfolio-info">
+            <span class="portfolio-tag">3D Design</span>
+            <h4 class="portfolio-project-title">Neofood Interactive Menu</h4>
+          </div>
+        </div>
+
+        <div class="portfolio-card" data-project="omni">
+          <div class="portfolio-img-box">
+            <img src="assets/service-ai.jpg" alt="AI Ad Project" class="portfolio-img">
+          </div>
+          <div class="portfolio-info">
+            <span class="portfolio-tag">AI Ads</span>
+            <h4 class="portfolio-project-title">Omni-Channel AI Launch</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Project Planner (Quote Builder) Section -->
+  <section class="planner-section" id="planner">
+    <div class="container">
+      <div class="planner-wrapper">
+        <div class="planner-info">
+          <h2 class="planner-title">Let's Scope Your <span class="gradient-text">Next Project</span></h2>
+          <p class="planner-desc">
+            Use our interactive planner to select services, outline requirements, and receive an instant estimation framework.
+          </p>
+          
+          <div class="planner-visual-card">
+            <h4 class="visual-card-title">Shivayur Proposal Builder</h4>
+            
+            <div class="estimator-row">
+              <span>Selected Services:</span>
+              <strong id="summaryServicesCount">0 Selected</strong>
+            </div>
+            <div class="estimator-row">
+              <span>Estimated Tech Stack:</span>
+              <span class="tags-container" id="summaryTechStack">-</span>
+            </div>
+            <div class="estimator-row">
+              <span>Timeline:</span>
+              <strong id="summaryTimeline">4 Weeks</strong>
+            </div>
+            
+            <div class="price-indicator">
+              <span class="price-label">Estimated Value Range</span>
+              <h3 class="price-amount" id="summaryPrice">$0 - $0</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="planner-form-container">
+          <form id="projectPlannerForm" class="planner-form" novalidate>
+            <div class="form-group">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <label class="form-label" style="margin-bottom: 0;">Select Services (Multiple allowed)</label>
+                <div class="currency-switch-box" style="display: flex; gap: 4px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 50px; padding: 3px;">
+                  <button type="button" class="currency-toggle active" data-currency="INR" style="background: var(--gradient-primary); border: none; border-radius: 50px; padding: 4px 12px; font-size: 0.75rem; font-weight: 600; cursor: pointer; color: #000; transition: all 0.2s;">₹ INR</button>
+                  <button type="button" class="currency-toggle" data-currency="USD" style="background: transparent; border: none; border-radius: 50px; padding: 4px 12px; font-size: 0.75rem; font-weight: 600; cursor: pointer; color: var(--text-secondary); transition: all 0.2s;">$ USD</button>
+                </div>
+              </div>
+              <div class="pill-group">
+                <button type="button" class="service-pill" data-service="web">Website Design</button>
+                <button type="button" class="service-pill" data-service="video">Video Editing</button>
+                <button type="button" class="service-pill" data-service="motion">Motion Graphics</button>
+                <button type="button" class="service-pill" data-service="logo">Logo Making</button>
+                <button type="button" class="service-pill" data-service="3d">3D Menu Design</button>
+                <button type="button" class="service-pill" data-service="ai">AI Ads Making</button>
+              </div>
+              <div class="error-msg" id="servicesError">Please select at least one service.</div>
+            </div>
+
+            <!-- Dynamic Video Length Range (hidden by default) -->
+            <div class="form-group hidden" id="videoDurationGroup">
+              <label for="videoDuration" class="form-label">Project Video Length: <span id="durationValue">5 Mins</span></label>
+              <input type="range" id="videoDuration" class="form-slider" min="1" max="30" value="5">
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="clientName" class="form-label">Your Name</label>
+                <input type="text" id="clientName" class="form-input" placeholder="Elon Musk" required>
+                <div class="error-msg">Name is required.</div>
+              </div>
+              <div class="form-group">
+                <label for="clientEmail" class="form-label">Email Address</label>
+                <input type="email" id="clientEmail" class="form-input" placeholder="elon@spacex.com" required>
+                <div class="error-msg">Valid email is required.</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="projectTimeline" class="form-label">Desired Speed/Timeline: <span id="timelineValue">4 Weeks</span></label>
+              <input type="range" id="projectTimeline" class="form-slider" min="1" max="12" value="4">
+            </div>
+
+            <div class="form-group">
+              <label for="projectDesc" class="form-label">Project Details</label>
+              <textarea id="projectDesc" class="form-input" rows="4" placeholder="Tell us about your brand vision, goals, and target audience..." required></textarea>
+              <div class="error-msg">Please write a brief description.</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block submit-btn" id="submitBtn">
+              <span class="btn-text">Submit Proposal Request</span>
+              <span class="btn-spinner hidden"></span>
+            </button>
+          </form>
+          
+          <div class="form-success-box hidden" id="formSuccess">
+            <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <h3>Proposal Request Received!</h3>
+            <p>Our cosmic agency core team has registered your specifications. We will review your selections and reach out within 12 hours with a comprehensive customized blueprint.</p>
+            <button class="btn btn-secondary mt-4" id="resetFormBtn">Build Another Plan</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="container">
+      <div class="section-header text-center">
+        <h2 class="section-title">What Clients <span class="gradient-text">Say About Us</span></h2>
+        <p class="section-desc">
+          Read ratings and stories from businesses that boosted their metrics using our designs.
+        </p>
+      </div>
+
+      <div class="testimonial-slider-container">
+        <div class="testimonial-slider" id="testimonialSlider">
+          <!-- Slide 1 -->
+          <div class="testimonial-slide active">
+            <div class="rating-stars">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-quote">
+              "Shivayur did an absolute miracle for our restaurant website. They created an interactive 3D menu that increased online table bookings by 67%! Their web design and communication are second to none."
+            </p>
+            <div class="testimonial-author">
+              <div class="author-info">
+                <span class="author-name">Sarah Jenkins</span>
+                <span class="author-title">CEO, Lumina Bistro Group</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="testimonial-slide">
+            <div class="rating-stars">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-quote">
+              "Our social media click-through rates skyrocketed after deploying the AI-driven video ads crafted by Shivayur. They delivered motion graphics that were extremely visual, polished, and on-brand."
+            </p>
+            <div class="testimonial-author">
+              <div class="author-info">
+                <span class="author-name">Marcus Vance</span>
+                <span class="author-title">Marketing Lead, Velo Electrics</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="testimonial-slide">
+            <div class="rating-stars">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-quote">
+              "We needed a corporate logo and a landing page redesign within two weeks. The team at Shivayur built a gorgeous website that loaded instantly and received amazing reviews from our board members."
+            </p>
+            <div class="testimonial-author">
+              <div class="author-info">
+                <span class="author-name">Aarav Mehta</span>
+                <span class="author-title">Founder, Apex Ventures</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slider-controls">
+          <button class="slider-arrow" id="prevSlide" aria-label="Previous reviews"><i class="fa-solid fa-chevron-left"></i></button>
+          <div class="slider-dots" id="sliderDots">
+            <span class="slider-dot active" data-index="0"></span>
+            <span class="slider-dot" data-index="1"></span>
+            <span class="slider-dot" data-index="2"></span>
+          </div>
+          <button class="slider-arrow" id="nextSlide" aria-label="Next reviews"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Newsletter Footer -->
+  <footer class="footer" id="contact">
+    <div class="container footer-container">
+      <div class="footer-top">
+        <div class="footer-brand-box">
+          <div class="logo-box footer-logo-box">
+            <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <use href="#logoSvgSymbol"></use>
+            </svg>
+            <span class="logo-text">SH<span class="accent-i">i</span>V<span class="accent-a">A</span>YUR</span>
+          </div>
+          <p class="footer-tagline">We build websites that build your business.</p>
+          <div style="margin-bottom: 24px; font-size: 0.9rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 8px;">
+            <span><i class="fa-solid fa-envelope" style="margin-right: 8px; color: var(--primary);"></i> shivayur.co.uk@gmail.com</span>
+            <span><i class="fa-solid fa-phone" style="margin-right: 8px; color: var(--primary);"></i> +91 97564 37155</span>
+          </div>
+          <div class="social-links" style="display: flex; gap: 16px; margin-top: 15px;">
+            <a href="https://www.instagram.com/shivayur.co.uk?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="font-size: 1.3rem; color: var(--text-secondary); transition: color 0.2s;"><i class="fa-brands fa-instagram"></i></a>
+            <a href="mailto:shivayur.co.uk@gmail.com" aria-label="Email" style="font-size: 1.3rem; color: var(--text-secondary); transition: color 0.2s;"><i class="fa-solid fa-envelope"></i></a>
+            <a href="tel:9756437155" aria-label="Phone" style="font-size: 1.3rem; color: var(--text-secondary); transition: color 0.2s;"><i class="fa-solid fa-phone"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-links-grid">
+          <div class="footer-col">
+            <h4 class="footer-heading">Services</h4>
+            <a href="#services" class="footer-link">Website Designing</a>
+            <a href="#services" class="footer-link">Video Editing</a>
+            <a href="#services" class="footer-link">Motion Graphics</a>
+            <a href="#services" class="footer-link">Logo Making</a>
+            <a href="#services" class="footer-link">3D Menu Design</a>
+            <a href="#services" class="footer-link">AI Ads Making</a>
+          </div>
+
+          <div class="footer-col">
+            <h4 class="footer-heading">Agency</h4>
+            <a href="#home" class="footer-link">About Us</a>
+            <a href="#portfolio" class="footer-link">Our Work</a>
+            <a href="#testimonials" class="footer-link">Client Reviews</a>
+            <a href="#planner" class="footer-link">Project Planner</a>
+          </div>
+
+          <div class="footer-col">
+            <h4 class="footer-heading">Subscribe to Nexus</h4>
+            <p class="footer-sub-text">Get design resources, industry tips, and tech insights directly in your inbox.</p>
+            <form id="subscribeForm" class="subscribe-form" novalidate>
+              <div class="subscribe-input-box">
+                <input type="email" id="subscribeEmail" placeholder="your@email.com" class="sub-input" required>
+                <button type="submit" class="sub-btn" aria-label="Subscribe"><i class="fa-solid fa-paper-plane"></i></button>
+              </div>
+              <div class="subscribe-msg text-sm mt-2" id="subscribeMsg"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Shivayur.co. All rights reserved. Crafted for digital excellence.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Booking Calendar Modal -->
+  <div class="booking-modal" id="bookingModal">
+    <div class="booking-modal-content">
+      <div class="drawer-header" style="border: none; padding: 20px 20px 0;">
+        <h3 class="drawer-title" style="font-size: 1.5rem;">Book a Strategy Session</h3>
+        <button class="close-drawer-btn" id="closeBookingBtn" aria-label="Close booking">&times;</button>
+      </div>
+      <div class="booking-modal-body" style="padding: 24px 20px 30px;">
+        <p class="text-sm text-secondary" style="margin-bottom: 20px; font-size: 0.85rem; line-height: 1.5;">Select a convenient slot to schedule a strategy call. You can easily integrate your real Calendly widget here (instructions are in the code).</p>
+        
+        <div class="booking-iframe-container" id="bookingIframeContainer">
+          <!-- Calendar Selector -->
+          <div class="mock-calendar">
+            <div class="mock-calendar-header">
+              <span>July 2026</span>
+            </div>
+            <div class="mock-calendar-grid">
+              <div class="day-label">Mon</div><div class="day-label">Tue</div><div class="day-label">Wed</div><div class="day-label">Thu</div><div class="day-label">Fri</div>
+              <div class="day-num disabled">12</div><div class="day-num disabled">13</div><div class="day-num active-day" style="border: 1px solid rgba(79, 172, 254, 0.3);">14</div><div class="day-num active-day" style="border: 1px solid rgba(79, 172, 254, 0.3);">15</div><div class="day-num active-day" style="border: 1px solid rgba(79, 172, 254, 0.3);">16</div>
+            </div>
+            <div class="mock-slots" style="margin-top: 20px; display: flex; justify-content: center; gap: 8px;">
+              <button type="button" class="slot-pill">10:00 AM</button>
+              <button type="button" class="slot-pill active">02:30 PM</button>
+              <button type="button" class="slot-pill">04:00 PM</button>
+            </div>
+          </div>
+          <!-- How to embed real widget instructions: 
+          To embed Calendly or other services, uncomment this iframe and replace the URL:
+          <iframe src="https://calendly.com/YOUR_CALENDLY_LINK" width="100%" height="450" frameborder="0"></iframe>
+          -->
+        </div>
+
+        <div class="drawer-cta-box" style="margin-top: 30px;">
+          <button type="button" class="btn btn-primary btn-block" id="confirmMockBookingBtn">Request Call Back</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="booking-overlay" id="bookingOverlay"></div>
+
+  <!-- Script File -->
+  <script src="index.js"></script>
+</body>
+</html>

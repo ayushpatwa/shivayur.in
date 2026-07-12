@@ -1045,7 +1045,7 @@ function initBookingModal() {
       const activeSlotEl = document.querySelector('.slot-pill.active');
       const slotText = activeSlotEl ? activeSlotEl.innerText : '02:30 PM';
 
-      alert(`Booking Request Sent!\nSelected Date: July ${dayText}, 2026 at ${slotText}.\nWe will send a calendar invite to shivayur.co.uk@gmail.com shortly.`);
+      alert(`Booking Request Sent!\nSelected Date: July ${dayText}, 2026 at ${slotText}.\nWe will send a calendar invite to shivayur.in@gmail.com shortly.`);
       closeModal();
     });
   }

@@ -1,43 +1,26 @@
 // shivayur.in Dynamic Functionality
 
-// Supabase Connection Settings - retrieves Vercel/Next build environment variables
-const supabaseUrl = (typeof process !== 'undefined' && process.env && process.env.NEXT_PUBLIC_SUPABASE_URL) 
-  ? process.env.NEXT_PUBLIC_SUPABASE_URL 
-  : (window.NEXT_PUBLIC_SUPABASE_URL || '');
-
-const supabaseAnonKey = (typeof process !== 'undefined' && process.env && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) 
-  ? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY 
-  : (window.NEXT_PUBLIC_SUPABASE_ANON_KEY || '');
-
-let supabaseClient = null;
-if (supabaseUrl && supabaseAnonKey && typeof supabase !== 'undefined') {
-  supabaseClient = supabase.createClient(supabaseUrl, supabaseAnonKey);
-}
-
-// Handles database insertions of bookings
+// Handles database insertions of bookings by securely fetching the serverless function proxy
 async function saveBookingToSupabase(bookingData) {
-  if (!supabaseClient) {
-    console.warn("Supabase client is not initialized. Using localStorage local ledger only.");
-    return { data: null, error: null };
+  try {
+    const response = await fetch('/api/booking', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(bookingData),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      return { data: null, error: { message: result.error || 'Serverless routing error' } };
+    }
+    return { data: result.data, error: null };
+  } catch (error) {
+    console.warn("API request failed. Saving request locally instead.", error);
+    return { data: null, error };
   }
-
-  const { data, error } = await supabaseClient
-    .from('bookings')
-    .insert([
-      {
-        proposal_id: bookingData.id,
-        client_name: bookingData.name,
-        client_email: bookingData.email,
-        selected_services: bookingData.services,
-        timeline: bookingData.timeline,
-        video_duration: bookingData.videoDuration,
-        budget_range: bookingData.budget,
-        project_description: bookingData.description,
-        timestamp: bookingData.timestamp
-      }
-    ]);
-
-  return { data, error };
 }
 
 document.addEventListener('DOMContentLoaded', () => {

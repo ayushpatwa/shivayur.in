@@ -1,5 +1,45 @@
 // shivayur.in Dynamic Functionality
 
+// Supabase Connection Settings - retrieves Vercel/Next build environment variables
+const supabaseUrl = (typeof process !== 'undefined' && process.env && process.env.NEXT_PUBLIC_SUPABASE_URL) 
+  ? process.env.NEXT_PUBLIC_SUPABASE_URL 
+  : (window.NEXT_PUBLIC_SUPABASE_URL || '');
+
+const supabaseAnonKey = (typeof process !== 'undefined' && process.env && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) 
+  ? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY 
+  : (window.NEXT_PUBLIC_SUPABASE_ANON_KEY || '');
+
+let supabaseClient = null;
+if (supabaseUrl && supabaseAnonKey && typeof supabase !== 'undefined') {
+  supabaseClient = supabase.createClient(supabaseUrl, supabaseAnonKey);
+}
+
+// Handles database insertions of bookings
+async function saveBookingToSupabase(bookingData) {
+  if (!supabaseClient) {
+    console.warn("Supabase client is not initialized. Using localStorage local ledger only.");
+    return { data: null, error: null };
+  }
+
+  const { data, error } = await supabaseClient
+    .from('bookings')
+    .insert([
+      {
+        proposal_id: bookingData.id,
+        client_name: bookingData.name,
+        client_email: bookingData.email,
+        selected_services: bookingData.services,
+        timeline: bookingData.timeline,
+        video_duration: bookingData.videoDuration,
+        budget_range: bookingData.budget,
+        project_description: bookingData.description,
+        timestamp: bookingData.timestamp
+      }
+    ]);
+
+  return { data, error };
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initNavigation();
   initStatsCounter();
@@ -586,45 +626,53 @@ function initProjectPlanner() {
     btnSpinner.classList.remove('hidden');
     submitBtn.style.pointerEvents = 'none';
 
-    setTimeout(() => {
+    // Capture specifications and build blueprint details
+    const servicesNames = selectedServices.map(key => servicePricing[key].name);
+    
+    let basePrice = 0;
+    selectedServices.forEach(key => {
+      const config = servicePricing[key];
+      let price = activeCurrency === 'INR' ? config.priceINR : config.priceUSD;
+      if (config.type === 'perMin') {
+        price = price * videoDuration;
+      }
+      basePrice += price;
+    });
+    
+    const currSymbol = activeCurrency === 'INR' ? '₹' : '$';
+    const formatPrice = (p) => activeCurrency === 'INR' ? p.toLocaleString('en-IN') : p.toString();
+    const budgetRange = `${currSymbol}${formatPrice(basePrice)} - ${currSymbol}${formatPrice(Math.ceil(basePrice * 1.3))}`;
+    const timelineValStr = `${timelineInput.value} Weeks`;
+    
+    const proposalId = `SHV-${Math.floor(Math.random() * 90000) + 10000}`;
+    const submissionData = {
+      id: proposalId,
+      name: nameInput.value,
+      email: emailInput.value,
+      services: servicesNames,
+      timeline: timelineValStr,
+      videoDuration: (selectedServices.includes('video') || selectedServices.includes('motion')) ? videoDuration : null,
+      budget: budgetRange,
+      description: descInput.value,
+      timestamp: new Date().toISOString()
+    };
+
+    // Save submission in localStorage
+    const existing = JSON.parse(localStorage.getItem('shivayur_quotes') || '[]');
+    existing.push(submissionData);
+    localStorage.setItem('shivayur_quotes', JSON.stringify(existing));
+
+    // Submit to Supabase database table
+    saveBookingToSupabase(submissionData).then(({ data, error }) => {
       btnSpinner.classList.add('hidden');
       btnText.style.opacity = '1';
       submitBtn.style.pointerEvents = 'auto';
 
-      // Capture specifications and build blueprint details
-      const servicesNames = selectedServices.map(key => servicePricing[key].name);
-      
-      let basePrice = 0;
-      selectedServices.forEach(key => {
-        const config = servicePricing[key];
-        let price = activeCurrency === 'INR' ? config.priceINR : config.priceUSD;
-        if (config.type === 'perMin') {
-          price = price * videoDuration;
-        }
-        basePrice += price;
-      });
-      
-      const currSymbol = activeCurrency === 'INR' ? '₹' : '$';
-      const formatPrice = (p) => activeCurrency === 'INR' ? p.toLocaleString('en-IN') : p.toString();
-      const budgetRange = `${currSymbol}${formatPrice(basePrice)} - ${currSymbol}${formatPrice(Math.ceil(basePrice * 1.3))}`;
-      const timelineValStr = `${timelineInput.value} Weeks`;
-      
-      const proposalId = `SHV-${Math.floor(Math.random() * 90000) + 10000}`;
-      const submissionData = {
-        id: proposalId,
-        name: nameInput.value,
-        email: emailInput.value,
-        services: servicesNames,
-        timeline: timelineValStr,
-        budget: budgetRange,
-        description: descInput.value,
-        timestamp: new Date().toISOString()
-      };
-
-      // Save submission in localStorage
-      const existing = JSON.parse(localStorage.getItem('shivayur_quotes') || '[]');
-      existing.push(submissionData);
-      localStorage.setItem('shivayur_quotes', JSON.stringify(existing));
+      if (error) {
+        console.error("Supabase Insertion Error:", error);
+      } else {
+        console.log("Supabase Booking Saved:", data);
+      }
 
       // Extract unique tech recommendation list
       let selectedTechs = [];
@@ -689,7 +737,7 @@ function initProjectPlanner() {
 
       form.classList.add('hidden');
       successBox.classList.remove('hidden');
-    }, 2000);
+    });
   });
   document.querySelectorAll('.form-input').forEach(input => {
     input.addEventListener('input', () => {

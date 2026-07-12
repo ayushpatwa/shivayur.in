@@ -1,4 +1,4 @@
-// shivayur.co Dynamic Functionality
+// shivayur.in Dynamic Functionality
 
 document.addEventListener('DOMContentLoaded', () => {
   initNavigation();
@@ -660,11 +660,11 @@ function initProjectPlanner() {
       `;
 
       // Log receipt for debugging / visual verification
-      console.log("SHIVAYUR.CO SUBMISSION REGISTERED:\n", submissionData);
+      console.log("SHIVAYUR.IN SUBMISSION REGISTERED:\n", submissionData);
 
       // Handle download proposal file
       document.getElementById('downloadProposalBtn').addEventListener('click', () => {
-        const fileContent = `SHIVAYUR.CO - SERVICE ESTIMATE PROPOSAL\n========================================\nProposal ID: ${proposalId}\nClient Name: ${nameInput.value}\nEmail: ${emailInput.value}\nDate: ${new Date().toLocaleDateString()}\n\nSelected Services:\n${servicesNames.map(s => `- ${s}`).join('\n')}\n${(selectedServices.includes('video') || selectedServices.includes('motion')) ? `Video Duration: ${videoDuration} Mins\n` : ''}\nRecommended Tech Stack:\n${uniqueTechs}\n\nProjected Timeline: ${timelineValStr}\nEstimated Budget Range: ${budgetRange}\n\nProject Scope & Specifications:\n"${descInput.value}"\n\n========================================\nThank you for choosing Shivayur.co. Our team will review this blueprint and email you within 12 hours with structural designs.\n`;
+        const fileContent = `SHIVAYUR.IN - SERVICE ESTIMATE PROPOSAL\n========================================\nProposal ID: ${proposalId}\nClient Name: ${nameInput.value}\nEmail: ${emailInput.value}\nDate: ${new Date().toLocaleDateString()}\n\nSelected Services:\n${servicesNames.map(s => `- ${s}`).join('\n')}\n${(selectedServices.includes('video') || selectedServices.includes('motion')) ? `Video Duration: ${videoDuration} Mins\n` : ''}\nRecommended Tech Stack:\n${uniqueTechs}\n\nProjected Timeline: ${timelineValStr}\nEstimated Budget Range: ${budgetRange}\n\nProject Scope & Specifications:\n"${descInput.value}"\n\n========================================\nThank you for choosing Shivayur.in. Our team will review this blueprint and email you within 12 hours with structural designs.\n`;
         const blob = new Blob([fileContent], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');

@@ -9,3 +9,8 @@ $RECYCLE.BIN/
 *.log
 .npm/
 node_modules/
+
+# Build output
+dist/
+dist-ssr/
+*.local

@@ -1,5 +1,9 @@
 // shivayur.in Dynamic Functionality
 
+// Initialize Vercel Web Analytics
+import { inject } from '@vercel/analytics';
+inject();
+
 // Handles database insertions of bookings by securely fetching the serverless function proxy
 async function saveBookingToSupabase(bookingData) {
   try {
